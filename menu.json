@@ -1,0 +1,19 @@
+{
+  "meals": {
+    "breakfast": [
+      "Pancakes with maple syrup",
+      "Scrambled eggs",
+      "Fresh fruit"
+    ],
+    "lunch": [
+      "Grilled chicken salad",
+      "Tomato soup",
+      "Garlic bread"
+    ],
+    "dinner": [
+      "Beef stew with rice",
+      "Roasted vegetables",
+      "Apple pie"
+    ]
+  }
+}
