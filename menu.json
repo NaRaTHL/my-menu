@@ -2,18 +2,15 @@
   "meals": {
     "breakfast": [
       "Rice",
-      "Scrambled eggs",
-      "Fresh fruit"
+      "Scrambled eggs"
     ],
     "lunch": [
-      "King Mushroom",
-      "Tomato soup",
-      "Garlic bread"
+      "Rice",
+      "Sunny-side-up eggs"
     ],
     "dinner": [
-      "Beef stew with rice",
-      "Roasted vegetables",
-      "Apple pie"
+      "Rice",
+      "Boiled eggs"
     ]
   }
 }
