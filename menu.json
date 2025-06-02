@@ -1,16 +1,17 @@
 {
   "meals": {
     "breakfast": [
-      "Rice",
-      "Scrambled eggs"
+      "Sticky Rice",
+      "Fritters"
     ],
     "lunch": [
       "Rice",
-      "Sunny-side-up eggs"
+      "Pork Fried With Pickled Cabbage"
     ],
     "dinner": [
-      "Rice",
-      "Boiled eggs"
+      "Pickled Tea Leaves Rice Salad",
+      "Fried Chicken",
+"Omelette"
     ]
   }
 }
