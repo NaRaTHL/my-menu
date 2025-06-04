@@ -1,65 +1,179 @@
-:root {
-  --primary-color: #2c3e50;
-  --secondary-color: #f1c40f;  /* Warm yellow background */
-  --accent-color: #f39c12;     /* Bright yellow-orange for headings */
-  --card-bg: #ffffff;
-  --border-radius: 12px;
-}
-
+/* General page styling */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
+  font-family: Arial, sans-serif;
+  background-color: #fdf6e3; /* Warm parchment-like background */
   margin: 0;
-  padding: 2rem;
+  padding: 0 1rem;
+  color: #4b3832; /* Cozy dark brown */
 }
 
 h1 {
-  color: var(--primary-color);
   text-align: center;
-  margin-bottom: 1rem;
-  font-size: 2rem;
+  color: #d2691e; /* Warm orange */
+  margin-top: 1rem;
 }
 
-p#date {
+#date {
   text-align: center;
-  font-style: italic;
-  color: #122aa3;
+  color: #6b4226; /* Earthy tone */
   margin-bottom: 2rem;
-  font-size: 1.2rem; 
+  font-style: italic;
 }
 
+/* Section styling */
 .menu-section {
-  background-color: var(--card-bg);
-  border-radius: var(--border-radius);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 1rem auto;
-  max-width: 500px;
-  padding: 1rem 2rem;
-  transition: transform 0.2s ease-in-out;
-}
-
-.menu-section:hover {
-  transform: translateY(-5px);
+  background-color: #fffaf0; /* Light cream */
+  border: 1px solid #e6ccb2; /* Light brown */
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .menu-section h2 {
-  color: var(--accent-color);
+  color: #8b4513; /* Warm brown header */
   margin-top: 0;
-  margin-bottom: 0.5rem;
 }
 
 .menu-section ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+  list-style-type: disc;
+  padding-left: 1.5rem;
 }
 
 .menu-section li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #eee;
+  margin: 0.3rem 0;
 }
 
-.menu-section li:last-child {
-  border-bottom: none;
+/* Suggested meals styling without underline */
+#suggested li {
+  position: relative;
+  /* border-bottom: 2px dashed #8b4513;  Remove this line to remove the underline */
+  padding: 0.5rem 2.5rem 0.5rem 0.5rem; /* Padding with space for button */
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #5a3e1b;
+  background-color: #fff8e1; /* subtle warm highlight */
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+#suggested li:hover {
+  background-color: #fff3c4; /* lighter on hover */
+}
+
+
+/* Remove button styling positioned on the right inside li */
+#suggested li .remove-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(220, 53, 69, 0.5);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+#suggested li .remove-btn:hover {
+  background-color: #b02a37;
+  box-shadow: 0 2px 8px rgba(176, 42, 55, 0.7);
+}
+
+#suggested li .remove-btn:focus {
+  outline: 2px solid #ffa500;
+  outline-offset: 2px;
+  box-shadow: 0 0 5px 2px #ffa500;
+}
+
+/* Suggestion section styling */
+.suggest-section {
+  background-color: #f0f5e9;
+  border-color: #c7e3af;
+}
+
+.suggest-container {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+#suggestion-input {
+  flex: 1;
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#suggestion-input:focus {
+  border-color: #ffa500;
+  box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+  outline: none;
+}
+
+#suggest-btn {
+  background-color: #ffa500;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#suggest-btn:hover {
+  background-color: #e69500;
+}
+
+#suggest-status {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  body {
+    padding: 0 0.5rem;
+  }
+
+  .menu-section {
+    padding: 0.75rem;
+  }
+
+  .suggest-container {
+    flex-direction: column;
+  }
+
+  #suggestion-input,
+  #suggest-btn {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .remove-btn {
+    margin-left: 0.5rem;
+    margin-top: 0.3rem;
+  }
+
+  #suggested li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 0.5rem; /* reduce right padding on small screens */
+  }
+
+  #suggested li button.remove-btn {
+    position: static;
+    transform: none;
+    align-self: flex-end;
+    margin-top: 0.25rem;
+  }
 }
