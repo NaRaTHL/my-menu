@@ -1,17 +1,19 @@
 {
   "meals": {
     "breakfast": [
-      "Sticky Rice",
-      "Fritters"
+      "Pancakes",
+      "Omelette"
     ],
     "lunch": [
-      "Rice",
-      "Pork Fried With Pickled Cabbage"
+      "Grilled Chicken",
+      "Salad"
     ],
     "dinner": [
-      "",
-      "",
-"Omelette"
+      "Pasta",
+      "Soup"
+    ],
+    "suggested": [
+      "Apple Pie"
     ]
   }
 }
