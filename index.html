@@ -1,30 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Nara's Menu</title>
-<link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Today's Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 <body>
-  <h1>Nara's Menu</h1>
-  <p id="date"></p>
+    <h1>Today's Menu</h1>
+    <p id="date">{{ now }}</p>
 
-  <section class="menu-section">
-    <h2>Breakfast</h2>
-    <ul id="breakfast"></ul>
-  </section>
+    <section class="menu-section">
+        <h2>Breakfast</h2>
+        <ul id="breakfast">
+            {% for item in menu.breakfast %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </section>
 
-  <section class="menu-section">
-    <h2>Lunch</h2>
-    <ul id="lunch"></ul>
-  </section>
+    <section class="menu-section">
+        <h2>Lunch</h2>
+        <ul id="lunch">
+            {% for item in menu.lunch %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </section>
 
-  <section class="menu-section">
-    <h2>Dinner</h2>
-    <ul id="dinner"></ul>
-  </section>
+    <section class="menu-section">
+        <h2>Dinner</h2>
+        <ul id="dinner">
+            {% for item in menu.dinner %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </section>
 
-  <script src="script.js"></script>
+    <section class="menu-section">
+        <h2>Suggested Meals</h2>
+        <ul id="suggested">
+            {% for item in menu.suggested %}
+                <li>
+                    {{ item }}
+                    <button class="remove-btn" data-meal="{{ item }}" aria-label="Remove {{ item }}">Remove</button>
+                </li>
+            {% else %}
+                <li>No suggestions yet.</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section class="menu-section suggest-section">
+        <h2>Suggest a Meal</h2>
+        <div class="suggest-container">
+            <input type="text" id="suggestion-input" placeholder="Enter your meal suggestion" aria-label="Meal suggestion" />
+            <button id="suggest-btn">Suggest</button>
+        </div>
+        <p id="suggest-status" role="alert" aria-live="polite"></p>
+    </section>
+
+    <script>
+        // Handle suggestion submit
+        document.getElementById('suggest-btn').addEventListener('click', () => {
+            const input = document.getElementById('suggestion-input');
+            const status = document.getElementById('suggest-status');
+            const suggestion = input.value.trim();
+            if (!suggestion) {
+                status.textContent = 'Please enter a meal suggestion.';
+                status.style.color = 'red';
+                return;
+            }
+
+            fetch('/suggest', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ suggestedMeal: suggestion })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    status.textContent = 'Thank you for your suggestion!';
+                    status.style.color = 'green';
+                    input.value = '';
+                    setTimeout(() => location.reload(), 1000);
+                } else {
+                    status.textContent = data.message;
+                    status.style.color = 'red';
+                }
+            })
+            .catch(() => {
+                status.textContent = 'Error submitting suggestion.';
+                status.style.color = 'red';
+            });
+        });
+
+        // Remove suggested meal when clicking Remove button
+        document.querySelectorAll('.remove-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const meal = button.dataset.meal;
+                if (!meal) return;
+
+                fetch('/remove', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mealToRemove: meal })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        button.parentElement.remove();
+                    } else {
+                        alert('Failed to remove meal: ' + data.message);
+                    }
+                })
+                .catch(() => alert('Error removing meal.'));
+            });
+        });
+    </script>
 </body>
 </html>
